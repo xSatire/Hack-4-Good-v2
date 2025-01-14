@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -46,4 +47,19 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
+}
+
+//Might want to have store wide discounts
+model Product {
+  productId        String        @id @default(uuid())
+  title             String
+  basePrice            Int
+  balance   Int
+  description      String
+  images           String[]
+
+  //Might want to add relation to users as to who bought it etc
+  //Might want to track the stock count, maybe balanceId etc
+
+  createdAt DateTime @default(now())
 }
